@@ -2,8 +2,7 @@
 
 namespace Time
 {
-    
-    struct Time
+    public struct Time
     {
         private byte hour, minutes, seconds;
         public readonly byte Hour => hour;
