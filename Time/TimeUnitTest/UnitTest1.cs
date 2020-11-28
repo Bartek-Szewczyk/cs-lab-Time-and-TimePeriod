@@ -24,5 +24,15 @@ namespace TimeUnitTest
             var time = new Time.Time();
             Assert.AreEqual("0:00:00", time.ToString());
         }
+
+        [TestMethod, TestCategory("Constructor Time")]
+        
+        public void Constructor_Time_Hour()
+        {
+            Time.Time time = new Time.Time(8);
+            
+            Assert.AreEqual("8:00:00", time.ToString());
+        }
+
     }
 }
