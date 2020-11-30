@@ -7,10 +7,11 @@ namespace Time
 {
     public struct TimePeriod : IEquatable<TimePeriod>, IComparable<TimePeriod>
     {
-        public readonly long Seconds;
+        private long seconds;
+        public readonly long Seconds => seconds;
         public TimePeriod(byte hour, byte minutes, byte seconds = 0)
         {
-            Seconds = hour * 3600 + verify(minutes, 0, 59) * 60 + verify(seconds, 0, 59);
+            this.seconds = hour * 3600 + verify(minutes, 0, 59) * 60 + verify(seconds, 0, 59);
 
             byte verify(byte value, byte min, byte max) =>
                 (value >= min && value <= max) ? value : throw new ArgumentException();
@@ -19,7 +20,7 @@ namespace Time
 
         public TimePeriod(long seconds)
         {
-            Seconds = seconds;
+            this.seconds = seconds;
         }
 
         public TimePeriod(string timePeriod)
@@ -30,7 +31,7 @@ namespace Time
             {
                 tabTime[i] = Byte.Parse(newtime[i]);
             }
-            Seconds = tabTime[0] * 3600 + verify(tabTime[1], 0, 59) * 60 + verify(tabTime[2], 0, 59);
+            this.seconds = tabTime[0] * 3600 + verify(tabTime[1], 0, 59) * 60 + verify(tabTime[2], 0, 59);
 
             byte verify(byte value, byte min, byte max) =>
                 (value >= min && value <= max) ? value : throw new ArgumentException();
@@ -116,6 +117,13 @@ namespace Time
             long ss = tp1.Seconds + tp2.Seconds;
 
             return new TimePeriod(ss);
+        }
+
+        public void TimePeriod_Plus(TimePeriod tp1)
+        {
+            long ss = Seconds + tp1.Seconds;
+            seconds = ss;
+
         }
     }
 }

@@ -190,8 +190,8 @@ namespace TimeUnitTest
             t2.Time_Plus(tp2);
 
 
-            Assert.AreEqual(tt1,t1);
-            Assert.AreEqual(tt2,t2);
+            Assert.AreEqual(tt1, t1);
+            Assert.AreEqual(tt2, t2);
 
         }
         [TestMethod, TestCategory("Operator Time")]
@@ -335,7 +335,21 @@ namespace TimeUnitTest
             TimePeriod ttp0 = tp1 + tp3;
 
             Assert.AreEqual("71:22:56", ttp.ToString());
-            Assert.AreEqual("56:07:50",ttp0.ToString());
+            Assert.AreEqual("56:07:50", ttp0.ToString());
+
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Method_Plus()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(73582);
+
+            TimePeriod ttp = tp1 + tp2;
+            TimePeriod ttp0 = tp1 + tp3;
+
+            Assert.AreEqual(ttp, tp1+tp2);
+            Assert.AreEqual(ttp0,tp1+tp3);
 
         }
 
