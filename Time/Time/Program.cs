@@ -13,7 +13,8 @@ namespace Time
             Time t1 = new Time(12, 22, 09);
             Time t2 = new Time(1,2,3);
             Time t3 = new Time("12:32:11");
-            Console.WriteLine(t3);
+            TimePeriod tp1 =new TimePeriod(6352);
+            Console.WriteLine(tp1);
         }
 
 

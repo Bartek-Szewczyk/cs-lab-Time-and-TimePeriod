@@ -91,6 +91,10 @@ namespace TimeUnitTest
         }
 
         #endregion
+
+        #region Time Operators==================
+
+
         [TestMethod, TestCategory("Equals Time")]
         public void Time_Equals()
         {
@@ -155,5 +159,39 @@ namespace TimeUnitTest
             Assert.IsTrue(t3 >= t1);
             Assert.IsFalse(t2 >= t3);
         }
+        #endregion
+
+        #region Constructor TimePeriod
+
+        [TestMethod, TestCategory("Constructor TimePeriod")]
+        public void Constructor_TimePeriod_Hour_Minutes_Seconds()
+        {
+            TimePeriod tp1 = new TimePeriod(11, 11, 11);
+            TimePeriod tp2 = new TimePeriod(143, 54, 2);
+
+            Assert.AreEqual("11:11:11", tp1.ToString());
+            Assert.AreEqual("143:54:02", tp2.ToString());
+        }
+
+        [TestMethod, TestCategory("Constructor TimePeriod")]
+        public void Constructor_TimePeriod_Hour_Minutes()
+        {
+            TimePeriod tp1 = new TimePeriod(11, 11);
+            TimePeriod tp2 = new TimePeriod(143, 54);
+
+            Assert.AreEqual("11:11:00", tp1.ToString());
+            Assert.AreEqual("143:54:00", tp2.ToString());
+        }
+        [TestMethod, TestCategory("Constructor TimePeriod")]
+        public void Constructor_TimePeriod_Seconds()
+        {
+            TimePeriod tp1 = new TimePeriod(6352);
+            TimePeriod tp2 = new TimePeriod(4321);
+
+            Assert.AreEqual("1:45:52", tp1.ToString());
+            Assert.AreEqual("1:12:01", tp2.ToString());
+        }
+
+        #endregion
     }
 }
