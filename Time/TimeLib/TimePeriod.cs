@@ -39,7 +39,7 @@ namespace Time
 
 
 
-        public override string ToString() => $"{Seconds / 3600}:{Seconds / 60 - (Seconds / 3600 * 60):D2}:{Seconds % 60:D2}";
+        public override string ToString() => $"{Seconds / 3600}:{(Seconds / 60)%60:D2}:{Seconds % 60:D2}";
 
 
         public bool Equals(TimePeriod other)
@@ -109,6 +109,13 @@ namespace Time
             if (tp1.Seconds > tp2.Seconds || tp1.Equals(tp2))
                 return true;
             return false;
+        }
+
+        public static TimePeriod operator +(TimePeriod tp1, TimePeriod tp2)
+        {
+            long ss = tp1.Seconds + tp2.Seconds;
+
+            return new TimePeriod(ss);
         }
     }
 }

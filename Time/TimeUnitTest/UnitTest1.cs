@@ -159,6 +159,57 @@ namespace TimeUnitTest
             Assert.IsTrue(t3 >= t1);
             Assert.IsFalse(t2 >= t3);
         }
+
+        [TestMethod, TestCategory("Operator Time")]
+        public void Time_Operator_Plus()
+        {
+            Time.Time t1 = new Time.Time(3, 15, 32);
+            TimePeriod tp1 = new TimePeriod("2:18:42");
+            Time.Time t2 = new Time.Time(17, 31, 59);
+            TimePeriod tp2 = new TimePeriod("26:10:46");
+
+            Time.Time tt1 = t1 + tp1;
+            Time.Time tt2 = t2 + tp2;
+
+            Assert.AreEqual("5:34:14", tt1.ToString());
+            Assert.AreEqual("19:42:45", tt2.ToString());
+
+        }
+        [TestMethod, TestCategory("Operator Time")]
+        public void Time_Method_Plus()
+        {
+            Time.Time t1 = new Time.Time(3, 15, 32);
+            TimePeriod tp1 = new TimePeriod("2:18:42");
+            Time.Time t2 = new Time.Time(17, 31, 59);
+            TimePeriod tp2 = new TimePeriod("26:10:46");
+
+            Time.Time tt1 = t1 + tp1;
+            Time.Time tt2 = t2 + tp2;
+
+            t1.Time_Plus(tp1);
+            t2.Time_Plus(tp2);
+
+
+            Assert.AreEqual(tt1,t1);
+            Assert.AreEqual(tt2,t2);
+
+        }
+        [TestMethod, TestCategory("Operator Time")]
+        public void Time_Operator_Minus()
+        {
+            Time.Time t1 = new Time.Time(3, 15, 32);
+            TimePeriod tp1 = new TimePeriod("2:18:42");
+            Time.Time t2 = new Time.Time(17, 31, 59);
+            TimePeriod tp2 = new TimePeriod("26:10:46");
+
+            Time.Time tt1 = t1 - tp1;
+            Time.Time tt2 = t2 - tp2;
+
+            Assert.AreEqual("0:56:50", tt1.ToString());
+            Assert.AreEqual("8:38:47", tt2.ToString());
+
+        }
+
         #endregion
 
         #region Constructor TimePeriod================
@@ -273,7 +324,20 @@ namespace TimeUnitTest
             Assert.IsFalse(tp1 >= tp3);
         }
 
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Plus()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(73582);
 
+            TimePeriod ttp = tp1 + tp2;
+            TimePeriod ttp0 = tp1 + tp3;
+
+            Assert.AreEqual("71:22:56", ttp.ToString());
+            Assert.AreEqual("56:07:50",ttp0.ToString());
+
+        }
 
         #endregion
     }
