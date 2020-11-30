@@ -2,7 +2,7 @@
 
 namespace Time
 {
-    public struct Time
+    public struct Time : IEquatable<Time>,IComparable<Time>
     {
         private byte hour, minutes, seconds;
         public readonly byte Hour => hour;
@@ -21,5 +21,29 @@ namespace Time
         }
 
         public override string ToString() => $"{Hour}:{Minutes:D2}:{Seconds:D2}";
+
+        public bool Equals(Time other)
+        {
+            return hour == other.hour && minutes == other.minutes && seconds == other.seconds;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Time other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(hour, minutes, seconds);
+        }
+
+        public int CompareTo(Time other)
+        {
+            var hourComparison = hour.CompareTo(other.hour);
+            if (hourComparison != 0) return hourComparison;
+            var minutesComparison = minutes.CompareTo(other.minutes);
+            if (minutesComparison != 0) return minutesComparison;
+            return seconds.CompareTo(other.seconds);
+        }
     }
 }

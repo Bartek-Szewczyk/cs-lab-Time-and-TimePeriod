@@ -34,5 +34,13 @@ namespace TimeUnitTest
             Assert.AreEqual("8:00:00", time.ToString());
         }
 
+        [TestMethod]
+        public void Time_Equals()
+        {
+            Time.Time t1 = new Time.Time(8,15);
+            Time.Time t2 = new Time.Time(8,15);
+
+            Assert.IsTrue(t1.Equals(t2));
+        }
     }
 }
