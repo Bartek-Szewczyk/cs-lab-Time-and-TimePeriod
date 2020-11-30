@@ -113,7 +113,7 @@ namespace TimeUnitTest
             Time.Time t3 = new Time.Time(15, 25, 53);
 
             Assert.IsTrue(t1 == t2);
-            Assert.IsFalse(t1 == t3);
+            Assert.IsTrue(t1 != t3);
         }
         [TestMethod, TestCategory("Equals Time")]
         public void Time_Operator_Smaller()
@@ -161,7 +161,7 @@ namespace TimeUnitTest
         }
         #endregion
 
-        #region Constructor TimePeriod
+        #region Constructor TimePeriod================
 
         [TestMethod, TestCategory("Constructor TimePeriod")]
         public void Constructor_TimePeriod_Hour_Minutes_Seconds()
@@ -187,10 +187,93 @@ namespace TimeUnitTest
         {
             TimePeriod tp1 = new TimePeriod(6352);
             TimePeriod tp2 = new TimePeriod(4321);
+            TimePeriod tp3 = new TimePeriod(236539);
 
             Assert.AreEqual("1:45:52", tp1.ToString());
             Assert.AreEqual("1:12:01", tp2.ToString());
+            Assert.AreEqual("65:42:19", tp3.ToString());
         }
+        [TestMethod, TestCategory("Constructor TimePeriod")]
+        public void Constructor_TimePeriod_String()
+        {
+            TimePeriod tp1 = new TimePeriod("1:45:52");
+            TimePeriod tp2 = new TimePeriod("1:12:01");
+            TimePeriod tp3 = new TimePeriod("65:42:19");
+
+            Assert.AreEqual("1:45:52", tp1.ToString());
+            Assert.AreEqual("1:12:01", tp2.ToString());
+            Assert.AreEqual(236539, tp3.Seconds);
+        }
+
+        #endregion
+
+        #region TimePeriod Operators============
+
+        [TestMethod, TestCategory("Equals TimePeriod")]
+        public void TimePeriod_Equlas()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(87322);
+
+            Assert.IsTrue(tp1.Equals(tp2));
+            Assert.IsFalse(tp1.Equals(tp3));
+        }
+
+        [TestMethod, TestCategory("Equals TimePeriod")]
+        public void TimePeriod_Operator_Equals()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(87322);
+
+            Assert.IsTrue(tp1 == tp2);
+            Assert.IsTrue(tp1 != tp3);
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Samller()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("65:41:28");
+            TimePeriod tp3 = new TimePeriod(872);
+
+            Assert.IsTrue(tp1 < tp2);
+            Assert.IsFalse(tp1 < tp3);
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Bigger()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("25:41:28");
+            TimePeriod tp3 = new TimePeriod(87673582);
+
+            Assert.IsTrue(tp1 > tp2);
+            Assert.IsFalse(tp1 > tp3);
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Smaller_Equals()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(87673582);
+
+            Assert.IsTrue(tp1 <= tp2);
+            Assert.IsTrue(tp1 <= tp3);
+            Assert.IsFalse(tp3 <= tp1);
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Bigger_Equals()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(87673582);
+
+            Assert.IsTrue(tp2 >= tp1);
+            Assert.IsTrue(tp3 >= tp1);
+            Assert.IsFalse(tp1 >= tp3);
+        }
+
+
 
         #endregion
     }
