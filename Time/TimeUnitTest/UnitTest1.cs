@@ -352,6 +352,20 @@ namespace TimeUnitTest
             Assert.AreEqual(ttp0,tp1+tp3);
 
         }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Operator_Minus()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("34:41:28");
+            TimePeriod tp3 = new TimePeriod(73582);
+
+            TimePeriod ttp = tp1 - tp2;
+            TimePeriod ttp0 = tp1 - tp3;
+
+            Assert.AreEqual("1:00:00", ttp.ToString());
+            Assert.AreEqual("15:15:06", ttp0.ToString());
+
+        }
 
         #endregion
     }

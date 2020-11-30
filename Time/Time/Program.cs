@@ -26,16 +26,16 @@ namespace Time
             //t1.Time_Plus(tp1);
 
             //Time tt1 = t2 + tp1;
-
             TimePeriod tp1 = new TimePeriod(35, 41, 28);
-            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp2 = new TimePeriod("36:41:28");
             TimePeriod tp3 = new TimePeriod(73582);
 
-            TimePeriod ttp = tp1 + tp2;
-            TimePeriod ttp0 = tp1 + tp3;
+            TimePeriod ttp = tp1 - tp2;
+            TimePeriod ttp0 = tp1 - tp3;
 
             Console.WriteLine(ttp);
             Console.WriteLine(ttp0);
+            Console.WriteLine(tp3);
             
         }
 

@@ -125,5 +125,16 @@ namespace Time
             seconds = ss;
 
         }
+
+        public static TimePeriod operator -(TimePeriod tp1, TimePeriod tp2)
+        {
+            long ss = tp1.seconds - tp2.seconds;
+            if (ss>=0)
+                return new TimePeriod(ss);
+            else
+                throw new ArgumentException();
+        }
+
+       
     }
 }
