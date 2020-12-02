@@ -84,59 +84,22 @@ namespace Time
 
         public static bool operator <(Time t1, Time t2)
         {
-            if (t1.hour < t2.hour)
-                return true;
-            else
-            if (t1.minutes < t2.minutes)
-                return true;
-            else
-            if (t1.seconds < t2.seconds)
-                return true;
-            else
-                return false;
+           return t1.CompareTo(t2)<0;
         }
 
         public static bool operator >(Time t1, Time t2)
         {
-
-            if (t1.hour > t2.hour)
-                return true;
-            else
-            if (t1.minutes > t2.minutes)
-                return true;
-            else
-            if (t1.seconds > t2.seconds)
-                return true;
-            else
-                return false;
+            return t1.CompareTo(t2) > 0;
         }
 
         public static bool operator <=(Time t1, Time t2)
         {
-            if (t1.hour < t2.hour || t1.Equals(t2))
-                return true;
-            else
-            if (t1.minutes < t2.minutes)
-                return true;
-            else
-            if (t1.seconds < t2.seconds)
-                return true;
-            else
-                return false;
+            return t1.CompareTo(t2) <= 0;
         }
 
         public static bool operator >=(Time t1, Time t2)
         {
-            if (t1.hour > t2.hour || t1.Equals(t2))
-                return true;
-            else
-            if (t1.minutes > t2.minutes)
-                return true;
-            else
-            if (t1.seconds > t2.seconds)
-                return true;
-            else
-                return false;
+            return t1.CompareTo(t2) >= 0;
         }
         public static long ToSeconds(Time t1)
         {

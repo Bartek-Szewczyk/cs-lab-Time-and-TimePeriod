@@ -85,31 +85,23 @@ namespace Time
 
         public static bool operator <(TimePeriod tp1, TimePeriod tp2)
         {
-            if (tp1.Seconds < tp2.Seconds)
-                return true;
-            return false;
+            return tp1.CompareTo(tp2) < 0;
         }
 
         public static bool operator >(TimePeriod tp1, TimePeriod tp2)
         {
-            if (tp1.Seconds > tp2.Seconds)
-                return true;
-            return false;
+            return tp1.CompareTo(tp2) > 0;
         }
 
         public static bool operator <=(TimePeriod tp1, TimePeriod tp2)
         {
-            if (tp1.Seconds < tp2.Seconds || tp1.Equals(tp2))
-                return true;
-            return false;
+            return tp1.CompareTo(tp2) <= 0;
 
         }
 
         public static bool operator >=(TimePeriod tp1, TimePeriod tp2)
         {
-            if (tp1.Seconds > tp2.Seconds || tp1.Equals(tp2))
-                return true;
-            return false;
+            return tp1.CompareTo(tp2) >= 0;
         }
 
         public static TimePeriod operator +(TimePeriod tp1, TimePeriod tp2)
