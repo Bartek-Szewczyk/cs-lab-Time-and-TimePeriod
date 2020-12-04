@@ -23,6 +23,9 @@ namespace Time
             this.seconds = seconds;
         }
 
+        /// <summary>
+        /// Zwraca upływ czasu odczytany z typu string
+        /// </summary>
         public TimePeriod(string timePeriod)
         {
             string[] newtime = timePeriod.Split(':');
@@ -38,9 +41,11 @@ namespace Time
         }
 
 
+        /// <summary>
+        /// Zwraca uływ czasu typu string w formacie h:mm:ss
+        /// </summary>
 
-
-        public override string ToString() => $"{Seconds / 3600}:{(Seconds / 60)%60:D2}:{Seconds % 60:D2}";
+        public override string ToString() => $"{Seconds / 3600}:{(Seconds / 60) % 60:D2}:{Seconds % 60:D2}";
 
 
         public bool Equals(TimePeriod other)
@@ -110,23 +115,28 @@ namespace Time
 
             return new TimePeriod(ss);
         }
-
-        public void TimePeriod_Plus(TimePeriod tp1)
+        public TimePeriod Plus(TimePeriod tp1)
         {
             long ss = Seconds + tp1.Seconds;
-            seconds = ss;
 
+            return new TimePeriod(ss);
+        }
+        public static TimePeriod Plus(TimePeriod tp1, TimePeriod tp2)
+        {
+            long ss = tp1.Seconds + tp2.Seconds;
+
+            return new TimePeriod(ss);
         }
 
         public static TimePeriod operator -(TimePeriod tp1, TimePeriod tp2)
         {
             long ss = tp1.seconds - tp2.seconds;
-            if (ss>=0)
+            if (ss >= 0)
                 return new TimePeriod(ss);
             else
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException("TimePeriod cannot be negative");
         }
 
-       
+
     }
 }

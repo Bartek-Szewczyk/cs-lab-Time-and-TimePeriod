@@ -22,44 +22,49 @@ namespace TimeUnitTest
         }
 
         [TestMethod, TestCategory("Constructor Time")]
-        public void Constructor_Time_ToString()
+        [DataRow ((byte)0, (byte) 0 , (byte) 0)]
+        [DataRow ((byte)14, (byte) 53 , (byte) 11)]
+        [DataRow ((byte)23, (byte) 17 , (byte) 1)]
+        public void Constructor_Time_ToString(byte h, byte m, byte s)
         {
-            var t1 = new Time.Time();
-            var t2 = new Time.Time(14, 53, 11);
+            var t1 = new Time.Time(h,m,s);
+            
 
-            Assert.AreEqual("0:00:00", t1.ToString());
-            Assert.AreEqual("14:53:11", t2.ToString());
+            Assert.AreEqual($"{h}:{m:D2}:{s:D2}", t1.ToString());
+            
         }
 
         [TestMethod, TestCategory("Constructor Time")]
-
-        public void Constructor_Time_Hour()
+        [DataRow((byte)9)]
+        [DataRow((byte)22)]
+        [DataRow((byte)13)]
+        public void Constructor_Time_Hour(byte h)
         {
-            Time.Time t1 = new Time.Time(8);
-            Time.Time t2 = new Time.Time(11);
+            Time.Time t1 = new Time.Time(h);
+            
 
-            Assert.AreEqual("8:00:00", t1.ToString());
-            Assert.AreEqual("11:00:00", t2.ToString());
+            Assert.AreEqual($"{h}:00:00", t1.ToString());
         }
         [TestMethod, TestCategory("Constructor Time")]
-
-        public void Constructor_Time_Hour_Minutes()
+        [DataRow((byte)9,(byte)52)]
+        [DataRow((byte)22,(byte) 16)]
+        [DataRow((byte)13, (byte) 54)]
+        public void Constructor_Time_Hour_Minutes(byte h, byte m)
         {
-            Time.Time t1 = new Time.Time(8, 46);
-            Time.Time t2 = new Time.Time(8, 46, 52);
+            Time.Time t1 = new Time.Time(h,m);
 
-            Assert.AreEqual("8:46:00", t1.ToString());
-            Assert.AreEqual("8:46:52", t2.ToString());
+            Assert.AreEqual($"{h}:{m:D2}:00", t1.ToString());
         }
 
         [TestMethod, TestCategory("Constructor Time")]
-        public void Constructor_Time_Hour_Minutes_Seconsd()
+        [DataRow((byte)19, (byte)42,(byte)32)]
+        [DataRow((byte)12, (byte)16, (byte) 21)]
+        [DataRow((byte)3, (byte)4,(byte)56)]
+        public void Constructor_Time_Hour_Minutes_Seconsd(byte h,byte m,byte s)
         {
-            Time.Time t1 = new Time.Time(8, 46, 35);
-            Time.Time t2 = new Time.Time(23, 46, 15);
+            Time.Time t1 = new Time.Time(h,m,s);
 
-            Assert.AreEqual("8:46:35", t1.ToString());
-            Assert.AreEqual("23:46:15", t2.ToString());
+            Assert.AreEqual($"{h}:{m:D2}:{s:D2}", t1.ToString());
         }
 
         [TestMethod, TestCategory("Constructor Time")]
@@ -186,12 +191,29 @@ namespace TimeUnitTest
             Time.Time tt1 = t1 + tp1;
             Time.Time tt2 = t2 + tp2;
 
-            t1.Time_Plus(tp1);
-            t2.Time_Plus(tp2);
+            
 
 
-            Assert.AreEqual(tt1, t1);
-            Assert.AreEqual(tt2, t2);
+            Assert.AreEqual(tt1, t1.Plus(tp1));
+            Assert.AreEqual(tt2, t2.Plus(tp2));
+
+        }
+        [TestMethod, TestCategory("Operator Time")]
+        public void Time_Static_Method_Plus()
+        {
+            Time.Time t1 = new Time.Time(3, 15, 32);
+            TimePeriod tp1 = new TimePeriod("2:18:42");
+            Time.Time t2 = new Time.Time(17, 31, 59);
+            TimePeriod tp2 = new TimePeriod("26:10:46");
+
+            Time.Time tt1 = t1 + tp1;
+            Time.Time tt2 = t2 + tp2;
+
+
+
+
+            Assert.AreEqual(tt1, Time.Time.Plus(t1,tp1));
+            Assert.AreEqual(tt2, Time.Time.Plus(t2,tp2));
 
         }
         [TestMethod, TestCategory("Operator Time")]
@@ -348,8 +370,22 @@ namespace TimeUnitTest
             TimePeriod ttp = tp1 + tp2;
             TimePeriod ttp0 = tp1 + tp3;
 
-            Assert.AreEqual(ttp, tp1+tp2);
-            Assert.AreEqual(ttp0,tp1+tp3);
+            Assert.AreEqual(ttp, tp1.Plus(tp2));
+            Assert.AreEqual(ttp0,tp1.Plus(tp3));
+
+        }
+        [TestMethod, TestCategory("Operator TimePeriod")]
+        public void TimePeriod_Static_Method_Plus()
+        {
+            TimePeriod tp1 = new TimePeriod(35, 41, 28);
+            TimePeriod tp2 = new TimePeriod("35:41:28");
+            TimePeriod tp3 = new TimePeriod(73582);
+
+            TimePeriod ttp = tp1 + tp2;
+            TimePeriod ttp0 = tp1 + tp3;
+
+            Assert.AreEqual(ttp, TimePeriod.Plus(tp2,tp1));
+            Assert.AreEqual(ttp0, TimePeriod.Plus(tp3, tp1));
 
         }
         [TestMethod, TestCategory("Operator TimePeriod")]

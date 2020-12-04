@@ -8,7 +8,9 @@ namespace Time
         public readonly byte Hour => hour;
         public readonly byte Minutes => minutes;
         public readonly byte Seconds => seconds;
-
+        /// <summary>
+        /// Zwraca godzinę słożoną z 3 elementów typu byte w określonym zakresie 
+        /// </summary>
         public Time(byte hour, byte minutes = 0, byte seconds = 0)
         {
             this.hour = verify(hour, 0, 23);
@@ -19,7 +21,9 @@ namespace Time
                 (value >= min && value <= max) ? value : throw new ArgumentException();
 
         }
-
+        /// <summary>
+        /// Zwraca godzinę odvzytaną z formatu string
+        /// </summary>
         public Time(string time)
         {
             string[] newtime = time.Split(':');
@@ -36,6 +40,9 @@ namespace Time
                 (value >= min && value <= max) ? value : throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Zwraca godzinę, typu string w formacie h:mm:ss
+        /// </summary>
         public override string ToString() => $"{Hour}:{Minutes:D2}:{Seconds:D2}";
 
         public bool Equals(Time other)
@@ -129,7 +136,7 @@ namespace Time
             return new Time(h, mm, ss);
         }
 
-        public void Time_Plus(TimePeriod tp1)
+        public Time Plus(TimePeriod tp1)
         {
             long sec = hour*3600+minutes*60+seconds + tp1.Seconds;
 
@@ -147,9 +154,28 @@ namespace Time
             byte ss = (byte)(sec % 60);
 
 
-            hour = h;
-            minutes = mm;
-            seconds = ss;
+            return new Time(h,mm,ss);
+        }
+
+        public static Time Plus(Time t1, TimePeriod tp1)
+        {
+            long sec = t1.Hour * 3600 + t1.Minutes * 60 + t1.Seconds + tp1.Seconds;
+
+            byte h;
+            if (sec / 3600 > 23)
+            {
+                h = (byte)((sec / 3600) % 24);
+            }
+            else
+            {
+                h = (byte)((sec / 3600));
+            }
+
+            byte mm = (byte)((sec / 60) % 60);
+            byte ss = (byte)(sec % 60);
+
+
+            return new Time(h, mm, ss);
         }
 
 

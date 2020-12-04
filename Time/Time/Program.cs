@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Time;
 
 
 
 namespace Time
 {
-    class Program
+    public class Program
     {
-        static void Main()
+       public  static void Main()
         {
             Time t01 = new Time(12, 22, 09);
             Time t02 = new Time(1, 2, 3);
@@ -23,22 +24,20 @@ namespace Time
 
             TimePeriod tp03 = new TimePeriod("4:10:46");
 
-            t1.Time_Plus(tp01);
+            t1.Plus(tp01);
+            TimePeriod tp05= TimePeriod.Plus(tp03, tp01);
 
             Time tt1 = t2 + tp01;
             TimePeriod tp1 = new TimePeriod(35, 41, 28);
             TimePeriod tp2 = new TimePeriod("36:41:28");
             TimePeriod tp3 = new TimePeriod(73582);
 
-            TimePeriod ttp = tp1 - tp2;
             TimePeriod ttp0 = tp1 - tp3;
 
-            Console.WriteLine(ttp);
             Console.WriteLine(ttp0);
             Console.WriteLine(tp3);
             
         }
-
 
     }
 }
