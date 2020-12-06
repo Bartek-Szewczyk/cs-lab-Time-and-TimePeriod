@@ -9,34 +9,33 @@ namespace Time
 {
     public class Program
     {
-       public  static void Main()
+        public static void Main()
         {
+            Console.WriteLine("Time Wypisany z 3 properties");
             Time t01 = new Time(12, 22, 09);
-            Time t02 = new Time(1, 2, 3);
-            Time t3 = new Time("12:32:11");
+            Console.WriteLine(t01);
+
+            Console.WriteLine("Time wypisany z formatu string");
+            Time t02 = new Time("12:32:11");
+            Console.WriteLine(t02);
+
+            Console.WriteLine("TimePeriod wypisany z properties sekundy");
             TimePeriod tp01 = new TimePeriod(6352);
+            Console.WriteLine(tp01);
+
+            Console.WriteLine("TimePeriod wypisany formatu string");
             TimePeriod tp02 = new TimePeriod("6:42:19");
+            Console.WriteLine(tp02);
+
+            Console.WriteLine("Dodawanie Time Metodą Plus");
+            t01.Plus(tp02);
+            Console.WriteLine(t01);
+
+            Console.WriteLine("Dodawanie TimePeriod metodą Plus");
+            TimePeriod tp05 = TimePeriod.Plus(tp02, tp01);
+            Console.WriteLine(tp05);
 
 
-            Time t1 = new Time(17, 31, 59);
-            Time t2 = new Time(17, 31, 59);
-            Console.WriteLine(t1);
-
-            TimePeriod tp03 = new TimePeriod("4:10:46");
-
-            t1.Plus(tp01);
-            TimePeriod tp05= TimePeriod.Plus(tp03, tp01);
-
-            Time tt1 = t2 + tp01;
-            TimePeriod tp1 = new TimePeriod(35, 41, 28);
-            TimePeriod tp2 = new TimePeriod("36:41:28");
-            TimePeriod tp3 = new TimePeriod(73582);
-
-            TimePeriod ttp0 = tp1 - tp3;
-
-            Console.WriteLine(ttp0);
-            Console.WriteLine(tp3);
-            
         }
 
     }
